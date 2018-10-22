@@ -22,3 +22,7 @@ class kirill(dragonling):
 		self.health = 1000
 		self.favourite = "caviar"
 		self.weakness = "oysters"
+		self.attack = ["fire",10]
+	def TakeTurn(self, player):
+		player.takeDamage(self.attack[1])
+		return player
