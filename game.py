@@ -8,13 +8,13 @@ def GameControl():
 
 def CreatePlayer():
         name = input("Please enter your name: ")
-        gender = input("Please pick your Gender: Male, Female or Other ")
+        gender = input("Please pick your Gender Male, Female or Other: ")
         if gender.upper() == ("MALE" or "BOY"):
-                gender = "male"
+                gender = 1
         elif gender.upper() == ("FEMALE" or "GIRL"):
-                gender = "female"
+                gender = 2
         else:
-                gender = "other"
+                gender = 3
         return player.player(name,gender)
 
 def roomStart():
