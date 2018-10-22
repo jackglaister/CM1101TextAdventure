@@ -2,7 +2,8 @@ class player:
 	def __init__(self, name, gender):
 		self.health = 100
 		self.name = name
-                self.gender = gender #1 is male, 2 is female, 3 is other		self.stamina = 100
+            	self.gender = gender #1 is male, 2 is female, 3 is other		
+		self.stamina = 100
 		self.xp = 0
 		self.inventory = []
 	def HealthDamage(self, damage):
