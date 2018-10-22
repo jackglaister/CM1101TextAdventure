@@ -3,6 +3,12 @@ class enemy():
 		self.name=name
 		self.xp = xp
 		self.health = health
+	def TakeDamage(self, damage):
+		self.health = self.health - damage
+		self.CheckDeath()
+	def CheckDeath(self):
+		if self.health <= 0:
+			self.dead = True
 
 class dragonling(enemy):
 	def __init__(self):
