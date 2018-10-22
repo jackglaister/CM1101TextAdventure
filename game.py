@@ -11,15 +11,15 @@ def CreatePlayer():
     name = input("Please enter your name: ")
     gender = input("Please pick your Gender: Male, Female or Other ")
     if gender.upper() == ("MALE" or "BOY"):
-        gender = "male"
+        gender = 1
     elif gender.upper() == ("FEMALE" or "GIRL"):
-        gender = "female"
+        gender = 2
     else:
-        gender = "other"
+        gender = 3
     return player.player(name,gender)
 
 def roomStart():
-    return room.room("the royal kitchen","you are a lowly servant to the Royal Family of Orleasia.",0,0)
+    return room.room("the royal kitchen","you are a young servant known by the name "+ "NAME" +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,0)
 
 def menu(current_room):
     print(current_room.name.upper()+"\n\n"+current_room.description)
