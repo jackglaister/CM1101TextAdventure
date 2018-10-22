@@ -6,6 +6,8 @@ class item():
         self.description=description
         self.value=value
         self.type=type
-
+        
 #item template is item(id,name,weight,description,value)
+#eg reference "items.caviar" to call upon it in another file (after importing items)
+
 caviar=item("caviar","caviar",0.1,"salt-cured fish ovum, a rare delicacy",100,"food")
