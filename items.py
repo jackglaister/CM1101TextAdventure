@@ -8,4 +8,4 @@ class item():
         self.type=type
 
 #item template is item(id,name,weight,description,value)
-item_caviar=item("caviar","caviar",0.1,"salt-cured fish ovum, a rare delicacy",100,"food")
+caviar=item("caviar","caviar",0.1,"salt-cured fish ovum, a rare delicacy",100,"food")
