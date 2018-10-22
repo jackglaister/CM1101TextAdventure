@@ -1,11 +1,11 @@
 import player, room, os
 def GameControl():
     os.system("cls")
-    player = CreatePlayer()
-    current_room = roomStart()
+    current_player = CreatePlayer()
+    current_room = roomStart(current_player)
     while True:
         os.system("cls")
-        menu(current_room)	
+        menu(current_room, current_player)	
 
 def CreatePlayer():
     name = input("Please enter your name: ")
@@ -18,10 +18,10 @@ def CreatePlayer():
         gender = 3
     return player.player(name,gender)
 
-def roomStart():
-    return room.room("the royal kitchen","you are a young servant known by the name "+ "NAME" +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,0)
+def roomStart(current_player):
+    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,0)
 
-def menu(current_room):
+def menu(current_room, current_player):
     print(current_room.name.upper()+"\n\n"+current_room.description)
 
 GameControl()
