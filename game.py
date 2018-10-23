@@ -52,7 +52,7 @@ def CreatePlayer():
     return player.player(name,gender)
 
 def roomStart(current_player):
-    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,0)
+    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"]],["central","right","left"])
 
 def menu(current_room, current_player):
     print(current_room.name.upper()+"\n\n"+current_room.description)
