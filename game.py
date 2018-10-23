@@ -18,7 +18,32 @@ def GameControl():
                 print("you what????")
 
 def CreatePlayer():
-    name = input("Please enter your name: ")
+
+    
+    longish = False
+    print("Please enter your name: ")
+    while not longish:
+        name = input(">")
+
+        
+        number = False
+        for char in name:
+            if not number:
+                if char.isdigit():
+                    print("No numbers in your name")
+                    number = True
+
+        
+        if not number:
+            if len(name) <2:
+                print("must at least be two characters long")
+            elif len(name) >20:
+                print("must not exceed twenty characters")
+            else:
+                longish = True
+    os.system("cls")
+
+    
     gender = input("Please pick your Gender: Male, Female or Other ")
     if gender.upper() == ("MALE" or "BOY"):
         gender = 1
