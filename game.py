@@ -1,6 +1,6 @@
 from player import player
-import room, os
 from items import itemDict
+import room, os
 def GameControl():
     os.system("cls")
     current_player = CreatePlayer()
@@ -23,9 +23,12 @@ def PrintOptions(current_room, current_player):
         if answer[0].upper() == "GO":
             if len(answer) > 3:
                 print("your answer is too long")
+            elif len(answer) < 2:
+                answer = input("Go where?")
+                current_room = current_room.next(answer)
             elif current_room.is_valid_exit(answer[1]):
                 current_room = current_room.next(answer[1])
-            done = True
+                done = True
         elif answer[0].upper() == "DROP":
             if len(answer) < 2:
                 answer = input("drop what?")
@@ -130,7 +133,7 @@ def CreatePlayer():
     return player(name,gender)
 
 def roomStart(current_player):
-    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oysters"]],["forward","right","left"])
+    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["forward","right","left"])
 
 def menu(current_room, current_player):
     print(current_room.name.upper()+"\n\n"+current_room.description)
