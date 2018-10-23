@@ -1,5 +1,4 @@
 from random import randint
-from items import itemDict
 class room():
     def __init__(self, name, description, x, items, exits):	#init class (x and y are location variables)
         self.name=name
@@ -7,23 +6,25 @@ class room():
         self.number=x
         self.exits=exits
         self.items=items
-        self.LastStatic=self
     def is_valid_exit(self, desired):
         for exits in self.exits:
             if exits.upper() == desired.upper():
                 return True
             else:
                 return False
-
     def next(self, answer):
+        LastStatic = self
         RoomNumber = self.number + 1
         self = rooms[RoomNumber]
-        if self == "random":
-            self = RandRooms[randint(0,len(RandRooms)-1)]
-            self.number = RoomNumber
-            return self
-        else:
+        try:
+            if self == "random":
+                self = RandRooms[randint(0,len(RandRooms))]
+                self.number = RoomNumber
+                self.LastStatic = LastStatic
+                return self
+        except:
             self = self
+            self.LastStatic = self
             return self
 
 rooms = [
