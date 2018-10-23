@@ -28,10 +28,10 @@ items = {
     "basesword":item("basesword","sword",15,"A single handed, double edged sword",90,"weapon",75),
     "ultimatesword":item("ultimatesword","ultimatesword",20,"A large two handed, heavyweight sword",200,"weapon",150),
 #armour    I added armour in but idk if there's an armour type 
-    "helmet":item("helmet","helmet",9,"A garnet for protecting the head",60,"armour",30),
-    "chestplate":item("chestplate","chestplate",20,"A garnet for protecting the chest",70,"armour",40),
-    "leggings":item("leggings","leggings",8,"A garnet for protecting the legs",50,"armour",25),
-    "boots":item("boots","boots",5,"A garnet for protecting the feet",40,"armour",25),
+    "helmet":item("helmet","helmet",9,"A garment for protecting the head",60,"armour",30),
+    "chestplate":item("chestplate","chestplate",20,"A garment for protecting the chest",70,"armour",40),
+    "leggings":item("leggings","leggings",8,"A garment for protecting the legs",50,"armour",25),
+    "boots":item("boots","boots",5,"A garment for protecting the feet",40,"armour",25),
 #potions
     "potionhp":item("pot.hp","health potion",0.3,"A potion used to restore 60 hp to the drinker",40,"food",60),
 #this potion could be used to increase the sword stat for a short period of time 
