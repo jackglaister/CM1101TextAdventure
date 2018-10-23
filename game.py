@@ -20,7 +20,7 @@ def PrintOptions(current_room, current_player):
         answer = input(">")
         answer = answer.split(" ")
         if answer[0].upper() == "GO":
-            if answer.length > 3:
+            if len(answer) > 3:
                 print("your answer is too long")
             elif current_room.is_valid_exit(answer[1]):
                 current_room = current_room.next(answer[1])

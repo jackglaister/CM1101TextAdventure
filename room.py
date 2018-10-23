@@ -8,12 +8,12 @@ class room():
     def is_valid_exit(self, desired):
         for exits in self.exits:
             if exits.upper() == desired.upper():
-                return true
+                return True
             else:
-                return false
+                return False
     def next(self, answer):
-        x = x + 1
-        if (x % 3) == 0:
+        self.number = self.number + 1
+        if (self.number % 3) == 0:
             ##static room at roomstore
             pass
         else:
