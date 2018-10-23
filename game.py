@@ -7,9 +7,9 @@ def GameControl():
     while True:
         os.system("cls")
         menu(current_room, current_player)
-        PrintOptions()
+        PrintOptions(current_room, current_player)
 
-def PrintOptions():
+def PrintOptions(current_room, current_player):
     printRoomItems(current_room.items)
     done = False
     print("\nWhat do you wish to do: ")
