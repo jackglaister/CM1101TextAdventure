@@ -1,4 +1,5 @@
 import player, room, os
+from items import itemDict
 def GameControl():
     os.system("cls")
     current_player = CreatePlayer()
