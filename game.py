@@ -9,6 +9,7 @@ def GameControl():
         PrintOptions()
 
 def PrintOptions():
+    printRoomItems(current_room.items)
     done = False
     print("\nWhat do you wish to do: ")
     print("GO FORETH to travel to the next room")
@@ -56,4 +57,17 @@ def roomStart(current_player):
 def menu(current_room, current_player):
     print(current_room.name.upper()+"\n\n"+current_room.description)
 
+def printRoomItems(itemlist):
+    itemslist = listItems(itemlist)
+    if itemslist == "":
+        print("there are no carryable items in this room")
+    else:
+        print("You can pick up: "+itemslist+" from here.")
+
+def listItems(itemlist):
+    itemslist = ""
+    for item in itemlist:
+        itemslist += item.name+", "
+    return itemslist
+    
 GameControl()
