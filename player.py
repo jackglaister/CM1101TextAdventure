@@ -9,4 +9,9 @@ class player:
     def HealthDamage(self, damage):
         self.health -= damage
     def GainXP(self, damage):
-        self.xp = self.health+damage/4
+        self.xp = self.xp+damage/4
+    def CheckDeath(self, damage):
+        if self.health < 0:
+            return True
+        else:
+            return False

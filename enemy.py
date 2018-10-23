@@ -9,6 +9,9 @@ class enemy():
     def CheckDeath(self):
         if self.health <= 0:
             self.dead = True
+            return True
+        else:
+            return False
 
 class dragonling(enemy):
     def __init__(self):

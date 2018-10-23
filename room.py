@@ -1,3 +1,5 @@
+from roomstore import *
+from random import randint
 class room():
     def __init__(self, name, description, x, items, exits):	#init class (x and y are location variables)
         self.name=name
@@ -12,10 +14,14 @@ class room():
             else:
                 return False
     def next(self, answer):
-        self.number = self.number + 1
-        if (self.number % 3) == 0:
-            ##static room at roomstore
-            pass
-        else:
-            ##random room at roomstore
-            pass
+        LastStatic = self
+        RoomNumber = self.number + 1
+        self = rooms[RoomNumber]
+        try:
+            if self == "random":
+                self = RandRooms[randint(0,len(RandRooms))]
+                self.number = RoomNumber
+                self.LastStatic = LastStatic
+        except:
+            self = self
+            self.LastStatic = self

@@ -50,8 +50,11 @@ def PrintOptions(current_room, current_player):
                 current_player = eat(answer, current_player)
             else:
                 current_player = eat(answer[1], current_player)
+        elif answer[0].upper() == "HELP":
+            helpscreen()
         else:
             print("you what????")
+            print("Type help if you are stuck for the commands to use")
 
 def eat(answer, current_player):
     newInv = []
@@ -127,7 +130,7 @@ def CreatePlayer():
     return player(name,gender)
 
 def roomStart(current_player):
-    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"]],["forward","right","left"])
+    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oysters"]],["forward","right","left"])
 
 def menu(current_room, current_player):
     print(current_room.name.upper()+"\n\n"+current_room.description)
@@ -164,5 +167,40 @@ def printExits(current_room):
     print("You can: ")
     for exitr in current_room.exits:
         print("Go "+exitr)
+
+def enterbattle(current_player, enemy):
+    print("========================================BATTLE========================================")
+    battle = True
+    while battle:
+        print("Your health "+current_player.health+"\n Your enemies health: "+enemy.health)
+        weapons = []
+        for item in current_player.inventory:
+            if item.type.upper() == "weapon":
+                weapons.append(item)
+        while True:
+            chosenWeapon = input("It is your turn to attack, what do you want to attack with? "+listItems(weapons))
+            for item in weapons:
+                if chosenWeapon.upper() == item.name.upper():
+                    chosenWeapon = item
+                    break
+            print("I didn't understand that, please try again")
+        enemy.TakeDamage(item.potency)
+        print("You successfully hit your enemy and their health is now at "+enemy.health)
+        current_player.HealthDamage(enemy.attack[1])
+        print("Your enemy retaliated and reduced your health by "+enemy.attack[1]+" to "+current_player.health+" by using their weapon of "+enemy.attack[0])
+        if current_player.CheckDeath():
+             print("You lost the battle you will go to the last static room")
+             current_room = current_room.LastStatic
+             return current_room, current_player
+        elif enemy.CheckDeath():
+             print("You have won the battle, you will advance to the next room and take all the items the enemy has")
+             return current_room, current_player
+
+def helpscreen():
+    print("HOW TO MOVE \n type go and a direction on your keyboard and hit enter, for example: \n go forward")
+    print("HOW TO TAKE AN ITEM FROM A ROOM \n type 'take' or 'pick up' and then the name of the item and hit enter, for example: \n take bread")
+    print("HOW TO DROP AN ITEM FROM YOUR INVENTORY \n type 'drop' and then the name of the item you wish to drop and press enter, for example: \n drop bread")
+    print("HOW TO EAT AN ITEM \n type 'eat' and then the name of the item in your inventory - you cannot eat straight from the room, for example: \n eat bread")
+    print("HOW TO ATTACK \n type 'hit with' and then the name of the item you want to attack with, for example: hit with kitchen knife")
 
 GameControl()
