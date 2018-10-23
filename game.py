@@ -34,10 +34,16 @@ def PrintOptions(current_room, current_player):
                 current_player, current_room = drop(answer[2:len(answer)], current_player, current_room)
         elif answer[0].upper() == "PICK":
             if len(answer) < 3:
-                answer = input("pick up what")
+                answer = input("pick up what? ")
                 current_room, current_player = pickup(answer, current_player, current_room)
             else:
                 current_room, current_player = pickup(answer[2], current_player, current_room)
+        elif answer[0].upper() == "TAKE":
+            if len(answer) < 2:
+                answer = input("Take what? ")
+                current_room, current_player = pickup(answer, current_player, current_room) 
+            else:
+                current_room, curernt_player = pickup(answer[1], current_player, current_room)
         elif (answer[0].upper() == "EAT" or answer[0].upper() == "CONSUME"):
             if len(answer) < 2:
                 answer = input("Eat what? ")
