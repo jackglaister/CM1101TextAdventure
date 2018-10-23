@@ -10,7 +10,7 @@ class item():
 
 #eg reference "items.caviar" to call upon it in another file (after importing items)
 #food
-items = {
+itemDict = {
     "caviar":item("caviar","caviar",0.1,"Salt-cured fish eggs, a rare delicacy",100,"food",30),
     "oyster":item("oyster","oyster",0.2,"Grown on racks in bags and can be characterized as being salty",100,"food",30),
     "insects":item("insects","insects",0.2,"Small creepy crawlies that can be eaten",20,"food",-10),
