@@ -4,8 +4,18 @@ def GameControl():
     current_player = CreatePlayer()
     current_room = roomStart(current_player)
     while True:
+        done = False
         os.system("cls")
-        menu(current_room, current_player)	
+        menu(current_room, current_player)
+        print("\nWhat do you wish to do: ")
+        print("GO FORETH to travel to the next room")
+        print("pick up and drop and use?") #make another function to say all this like with the demos we had
+        while not done:
+            answer = input(">")
+            if answer.upper() == "GO FORETH":
+                done = True
+            else:
+                print("you what????")
 
 def CreatePlayer():
     name = input("Please enter your name: ")
