@@ -4,36 +4,35 @@ def GameControl():
     current_player = CreatePlayer()
     current_room = roomStart(current_player)
     while True:
-        done = False
         os.system("cls")
         menu(current_room, current_player)
-        print("\nWhat do you wish to do: ")
-        print("GO FORETH to travel to the next room")
-        print("pick up and drop and use?") #make another function to say all this like with the demos we had
-        while not done:
-            answer = input(">")
-            if answer.upper() == "GO FORETH":
-                done = True
-            else:
-                print("you what????")
+        PrintOptions()
+
+def PrintOptions():
+    done = False
+    print("\nWhat do you wish to do: ")
+    print("GO FORETH to travel to the next room")
+    print("pick up and drop and use?") #make another function to say all this like with the demos we had
+    while not done:
+        answer = input(">")
+        if answer.upper() == "GO FORETH":
+            #another function to select room and move on 
+            done = True
+        #elif's for pick up, drop, consume
+        else:
+            print("you what????")
 
 def CreatePlayer():
-
-    
     longish = False
     print("Please enter your name: ")
     while not longish:
         name = input(">")
-
-        
         number = False
         for char in name:
             if not number:
                 if char.isdigit():
                     print("No numbers in your name")
                     number = True
-
-        
         if not number:
             if len(name) <2:
                 print("must at least be two characters long")
@@ -42,8 +41,6 @@ def CreatePlayer():
             else:
                 longish = True
     os.system("cls")
-
-    
     gender = input("Please pick your Gender: Male, Female or Other ")
     if gender.upper() == ("MALE" or "BOY"):
         gender = 1
