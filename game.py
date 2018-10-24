@@ -14,16 +14,16 @@ def PrintOptions(current_room, current_player):
     printRoomItems(current_room.items)
     printInventoryItems(current_player.inventory)
     print("Your health is currently "+str(current_player.health))
-    print("\n What do you wish to do?: ")
+    print("\n What do you wish to do: ")
     printExits(current_room)
     while True:
         answer = input(">")
         answer = answer.split(" ")
         if answer[0].upper() == "GO":
             if len(answer) > 3:
-                print("Your answer is too long")
+                print("your answer is too long")
             elif len(answer) < 2:
-                answer = input("Go where? ")
+                answer = input("Go where?")
                 if current_room.is_valid_exit(answer):
                     current_room = current_room.next(answer)
                     return current_room, current_player
@@ -32,22 +32,22 @@ def PrintOptions(current_room, current_player):
                 return current_room, current_player
         elif answer[0].upper() == "DROP":
             if len(answer) < 2:
-                answer = input("Drop what? ")
+                answer = input("drop what?")
                 current_player, current_room = drop(answer, current_player, current_room)
             else:
                 current_player, current_room = drop(answer[2:len(answer)], current_player, current_room)
         elif answer[0].upper() == "PICK":
             if len(answer) < 3:
-                answer = input("Pick up what? ")
+                answer = input("pick up what? ")
                 current_room, current_player = pickup(answer, current_player, current_room)
             else:
-                current_room, current_player = pickup(answer[2], current_player, current_room)
+                current_room, current_player = pickup(answer[2:len(answer)], current_player, current_room)
         elif answer[0].upper() == "TAKE":
             if len(answer) < 2:
                 answer = input("Take what? ")
                 current_room, current_player = pickup(answer, current_player, current_room) 
             else:
-                current_room, curernt_player = pickup(answer[1], current_player, current_room)
+                current_room, curernt_player = pickup(answer[1:len(answer)], current_player, current_room)
         elif (answer[0].upper() == "EAT" or answer[0].upper() == "CONSUME"):
             if len(answer) < 2:
                 answer = input("Eat what? ")
@@ -57,8 +57,8 @@ def PrintOptions(current_room, current_player):
         elif answer[0].upper() == "HELP":
             helpscreen()
         else:
-            print("You what???? ")
-            print("Type 'Help' if you are stuck for the commands to use ")
+            print("you what????")
+            print("Type help if you are stuck for the commands to use")
 
 def eat(answer, current_player):
     newInv = []
@@ -66,9 +66,8 @@ def eat(answer, current_player):
         if answer.upper() == item.name.upper():
             if item.type.upper() == "FOOD":
                 current_player.health += item.potency
-                print("You have eaten the item")
             else:
-                print("You can't eat that! ")
+                print("I can't eat that!")
                 newInv.append(item)
         else:
              newInv.append(item)
@@ -78,14 +77,14 @@ def eat(answer, current_player):
 def pickup(answer, current_player, current_room):
     roomitems = []
     for item in current_room.items:
-        if item.name.upper() == answer.upper():
+        if item.name.split(" ")[0].upper() == answer[0].upper():
             current_player.inventory.append(item)
         else:
             roomitems.append(item)
     if len(roomitems) == len(current_room.items):
-        print("You cannot pick that up")
+        print("you cannot pick that up")
     else:
-        print("Successfully picked up "+answer)
+        print("successfully picked up "+current_player.inventory[len(current_player.inventory)-1].name)
         current_room.items = roomitems
         return current_room, current_player
 
@@ -101,9 +100,9 @@ def drop(answer, current_player, current_room):
     if (found):
         current_player.inventory = inventory
         return current_player, current_room
-        print("Successfully dropped "+answer)
+        print("successfully dropped "+answer)
     else:
-        print("You do not have one of those to drop")
+        print("you do not have one of those to drop")
         return current_player, current_room
 
 def CreatePlayer():
@@ -135,7 +134,7 @@ def CreatePlayer():
     return player(name,gender)
 
 def roomStart(current_player):
-    return room.room("The Royal Kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.\nWill you die a failure, or will you be remembered forever?",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["forward","right","left"])
+    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["forward","right","left"])
 
 def menu(current_room, current_player):
     print(current_room.name.upper()+"\n\n"+current_room.description)
@@ -143,14 +142,14 @@ def menu(current_room, current_player):
 def printRoomItems(itemlist):
     itemslist = listItems(itemlist)
     if itemslist == "":
-        print("There are no carryable items in this room.")
+        print("There are no carryable items in this room")
     else:
         print("You can pick up: "+itemslist+" from here.")
 
 def printInventoryItems(inventory):
     itemslist = listItems(inventory)
     if itemslist == "":
-        print("There are no items you can drop.")
+        print("There are no items you can drop")
     else:
         print("You have and can drop "+itemslist)
     edible = []
@@ -161,7 +160,8 @@ def printInventoryItems(inventory):
     if len(edibleList) > 0:
         print("You can also eat: "+edibleList)
     else:
-        print("You are carrying no edible items.")
+        print("You are carrying no edible items")
+
 def listItems(itemlist):
     itemslist = ""
     for item in itemlist:
@@ -174,7 +174,7 @@ def printExits(current_room):
         print("Go "+exitr)
 
 def enterbattle(current_player, enemy):
-    print("=======================================BATTLE=========================================")
+    print("========================================BATTLE========================================")
     battle = True
     while battle:
         print("Your health "+current_player.health+"\n Your enemies health: "+enemy.health)
@@ -192,22 +192,22 @@ def enterbattle(current_player, enemy):
         enemy.TakeDamage(item.potency)
         print("You successfully hit your enemy and their health is now at "+enemy.health)
         if enemy.CheckDeath():
-             print("You have dealt your enemy a fatal blow.")
-             print("You have won the battle and you can advance to the next room! You have also looted all of the items your enemy had.")
+             print("You have dealt your enemy a fatal blow")
+             print("You have won the battle, you will advance to the next room and take all the items the enemy has")
              return current_room, current_player
         current_player.HealthDamage(enemy.attack[1])
         print("Your enemy retaliated and reduced your health by "+enemy.attack[1]+" to "+current_player.health+" by using their weapon of "+enemy.attack[0])
         if current_player.CheckDeath():
-             print("You lost the battle you will go to the last static room.")
+             print("You lost the battle you will go to the last static room")
              current_room = current_room.LastStatic
              return current_room, current_player
         
 
 def helpscreen():
-    print("HOW TO MOVE \n Type 'go' and a direction on your keyboard and hit enter, for example: \n 'Go forward'")
-    print("HOW TO TAKE AN ITEM FROM A ROOM \n Type 'take' or 'pick up' and then the name of the item and hit enter, for example: \n 'Take bread'")
-    print("HOW TO DROP AN ITEM FROM YOUR INVENTORY \n Type 'drop' and then the name of the item you wish to drop and press enter, for example: \n 'Drop bread'")
-    print("HOW TO EAT AN ITEM \n Type 'eat' and then the name of the item in your inventory - you cannot eat an item unless you have taken it, for example: \n 'Eat bread'")
-    print("HOW TO ATTACK \n Type 'hit with' and then the name of the item you want to attack with, for example: \n 'Hit with kitchen knife'")
+    print("HOW TO MOVE \n type go and a direction on your keyboard and hit enter, for example: \n go forward")
+    print("HOW TO TAKE AN ITEM FROM A ROOM \n type 'take' or 'pick up' and then the name of the item and hit enter, for example: \n take bread")
+    print("HOW TO DROP AN ITEM FROM YOUR INVENTORY \n type 'drop' and then the name of the item you wish to drop and press enter, for example: \n drop bread")
+    print("HOW TO EAT AN ITEM \n type 'eat' and then the name of the item in your inventory - you cannot eat straight from the room, for example: \n eat bread")
+    print("HOW TO ATTACK \n type 'hit with' and then the name of the item you want to attack with, for example: hit with kitchen knife")
 
 GameControl()
