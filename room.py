@@ -56,7 +56,7 @@ rooms = [
 
     "random",
  
-    room("Town Centre/Merchants","Here is a place where you can buy (almost) anything, use your gold wisely.",9,[],[]),
+    room("Merchant","Here is a place where you can buy (almost) anything, use your gold wisely.",9,[],[]),
 
     "Kirill Encounter",
 
