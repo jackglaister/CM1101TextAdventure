@@ -39,36 +39,28 @@ class room():
             return self
 
 rooms = [
-
     "starter room"
-
     "random",
-
     "random",
-
     "random",
-
-    room("Castle Basement","On the floor of the castle basement appears a puzzle with the following 2,1,18,5, ,18,22,15,17,4 can you determine the item it is hiding?",5,[],[]),
-
+    room("Castle Basement",firstPuzzle(),5,[],[]),
     "random",
-
     "random",
-
     "random",
- 
-    room("Merchant","Here is a place where you can buy (almost) anything, use your gold wisely.",9,[],[]),
-
+    room("Puzzle 2",secondPuzzle(),9,[],[])
+    "random",
+    "random",
+    "random",
+    room("Merchant","Here is a place where you can buy (almost) anything, use your gold wisely.",13,[],[]),
     "Kirill Encounter",
-
     "random",
-
     "random",
-
-    room("Dragon","You have wondered far into an ominous cave, you heard a roar in the distance and thought you ought to check it out. You have since turned a corner and are faced with a dragon. His name is Kirill and you shall be killed for your trespass",9,[],[])
-
+    room("Puzzle 3",thirdPuzzle(),17,[],[])
+    "random",
+    "random",
+    "random",
+    room("Dragon","You have wondered far into an ominous cave, you heard a roar in the distance and thought you ought to check it out. You have since turned a corner and are faced with a dragon. His name is Kirill and you shall be killed for your trespass",21,[],[])
 ]
-
-
 
 RandRooms = [
     room("Dark Road","An old homeless lady is sat on the edge of a path with a sword. She tells you it is very valuable and was passed down from a long line of ancestors. She is offering it for sale for 100 gold. Do you take it?",0,[],[]),
