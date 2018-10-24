@@ -25,8 +25,9 @@ def PrintOptions(current_room, current_player):
                 print("your answer is too long")
             elif len(answer) < 2:
                 answer = input("Go where?")
-                current_room = current_room.next(answer)
-                if 
+                if current_room.is_valid_exit(answer):
+                    current_room = current_room.next(answer)
+                    done = True
             elif current_room.is_valid_exit(answer[1]):
                 current_room = current_room.next(answer[1])
                 done = True
