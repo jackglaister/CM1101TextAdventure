@@ -182,7 +182,7 @@ def CreatePlayer():
     return player(name,gender)
 
 def roomStart(current_player):
-    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["forward","right","left"])
+    return room.room("the royal kitchen","you are a young servant known as "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["forward","right","left"])
 
 def menu(current_room, current_player):
     print(current_room.name.upper()+"\n\n"+current_room.description)
@@ -278,10 +278,10 @@ def enterbattle(current_room, current_player, enemy):
              return current_room, current_player
 
 def helpscreen():
-    print("HOW TO MOVE \n type go and a direction on your keyboard and hit enter, for example: \n go forward")
-    print("HOW TO TAKE AN ITEM FROM A ROOM \n type 'take' or 'pick up' and then the name of the item and hit enter, for example: \n take bread")
-    print("HOW TO DROP AN ITEM FROM YOUR INVENTORY \n type 'drop' and then the name of the item you wish to drop and press enter, for example: \n drop bread")
-    print("HOW TO EAT AN ITEM \n type 'eat' and then the name of the item in your inventory - you cannot eat straight from the room, for example: \n eat bread")
-    print("HOW TO ATTACK \n type 'hit with' and then the name of the item you want to attack with, for example: hit with kitchen knife")
+    print("HOW TO MOVE \n\ntype go and a direction on your keyboard and hit enter, for example: \ngo forward")
+    print("HOW TO TAKE AN ITEM FROM A ROOM \n\ntype 'take' or 'pick up' and then the name of the item and hit enter, for example: \n take bread")
+    print("HOW TO DROP AN ITEM FROM YOUR INVENTORY \ntype 'drop' and then the name of the item you wish to drop and press enter, for example: \n drop bread")
+    print("HOW TO EAT AN ITEM \ntype 'eat' and then the name of the item in your inventory - you cannot eat straight from the room, for example: \n eat bread")
+    print("HOW TO ATTACK \ntype 'hit with' and then the name of the item you want to attack with, for example: hit with kitchen knife")
 
 GameControl()
