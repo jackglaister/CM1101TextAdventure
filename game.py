@@ -1,46 +1,23 @@
 from player import player
 from items import itemDict
-import room, os, enemy
+import room, os
 def GameControl():
     os.system("cls")
     current_player = CreatePlayer()
     current_room = roomStart(current_player)
-    enemy = ""
     while True:
         os.system("cls")
         menu(current_room, current_player)
-        if enemy == "":
-            current_room, current_player = PrintOptions(current_room, current_player)
-        else:
-            current_room, current_player = enterBattle(current_player, enemy, current_room)
-        current_room, current_enemy = configureRoom(current_room, current_player)
-
-def configureRoom(current_room, current_player): 
-   if current_room.name == "Dark Road":
-       current_enemy = enemy.oldlady()
-       print(current_room.name)
-       print(current_room.description)
-       print("You can: attack her, pay the money or ignore her")
-       while True:
-           user_choice = input("what do you want to do: ")
-           if user_choice{0:6].upper() == "ATTACK":
-               enterbattle(current_player, current_enemy)
-           elif user_choice[0:4].upper() == "PAY":
-               if (current_player.gold > 100):
-                   current_player.gold -= 100
-                   current_player.inventory.append(itemDict["ultimatesword"])
-               else:
-                   print("You don't have enough gold")
-           elif user_choice[0:7].upper() == "IGNORE":
-               return current_room, current_player
+        PrintOptions(current_room, current_player)
 
 def PrintOptions(current_room, current_player):
     printRoomItems(current_room.items)
     printInventoryItems(current_player.inventory)
     print("Your health is currently "+str(current_player.health))
+    done = False
     print("\n What do you wish to do: ")
     printExits(current_room)
-    while True:
+    while not done:
         answer = input(">")
         answer = answer.split(" ")
         if answer[0].upper() == "GO":
@@ -48,12 +25,11 @@ def PrintOptions(current_room, current_player):
                 print("your answer is too long")
             elif len(answer) < 2:
                 answer = input("Go where?")
-                if current_room.is_valid_exit(answer):
-                    current_room = current_room.next(answer)
-                    return current_room, current_player
+                current_room = current_room.next(answer)
+                if 
             elif current_room.is_valid_exit(answer[1]):
                 current_room = current_room.next(answer[1])
-                return current_room, current_player
+                done = True
         elif answer[0].upper() == "DROP":
             if len(answer) < 2:
                 answer = input("drop what?")
@@ -95,7 +71,7 @@ def eat(answer, current_player):
                 newInv.append(item)
         else:
              newInv.append(item)
-    current_player.inventory = newInv.append(item)
+    current_player.inventory = newInv
     return current_player
 
 def pickup(answer, current_player, current_room):
@@ -120,7 +96,7 @@ def drop(answer, current_player, current_room):
             found = True
             current_room.items.append(item)
         else:
-            inventory.append(item.name)
+            inventory.append(item)
     if (found):
         current_player.inventory = inventory
         return current_player, current_room
@@ -196,7 +172,7 @@ def printExits(current_room):
     for exitr in current_room.exits:
         print("Go "+exitr)
 
-def enterbattle(current_player, enemy, current_room):
+def enterbattle(current_player, enemy):
     print("========================================BATTLE========================================")
     battle = True
     while battle:
