@@ -10,7 +10,7 @@ def GameControl():
     number = 0
     while True:
         print(number)
-        if current_player.CheckWin() or current_player.win:
+        if current_player.CheckKarmaWin() or current_player.win:
             print("You win the game!")
         os.system("cls")
         print("Your health is currently: "+str(current_player.health))
