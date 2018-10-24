@@ -39,7 +39,7 @@ def GameControl():
                             print("I didn't understand that")
                     else:
                         print("I didn't understand that")
-            elif current_room.name=="Merchant:
+            elif current_room.name=="Merchant":
                 merchantEncounter(itemDict,current_player,current_room)
         else:
             menu(current_room, current_player)
