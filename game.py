@@ -14,16 +14,16 @@ def PrintOptions(current_room, current_player):
     printRoomItems(current_room.items)
     printInventoryItems(current_player.inventory)
     print("Your health is currently "+str(current_player.health))
-    print("\n What do you wish to do: ")
+    print("\n What do you wish to do?: ")
     printExits(current_room)
     while True:
         answer = input(">")
         answer = answer.split(" ")
         if answer[0].upper() == "GO":
             if len(answer) > 3:
-                print("your answer is too long")
+                print("Your answer is too long")
             elif len(answer) < 2:
-                answer = input("Go where?")
+                answer = input("Go where? ")
                 if current_room.is_valid_exit(answer):
                     current_room = current_room.next(answer)
                     return current_room, current_player
@@ -32,13 +32,13 @@ def PrintOptions(current_room, current_player):
                 return current_room, current_player
         elif answer[0].upper() == "DROP":
             if len(answer) < 2:
-                answer = input("drop what?")
+                answer = input("Drop what? ")
                 current_player, current_room = drop(answer, current_player, current_room)
             else:
                 current_player, current_room = drop(answer[2:len(answer)], current_player, current_room)
         elif answer[0].upper() == "PICK":
             if len(answer) < 3:
-                answer = input("pick up what? ")
+                answer = input("Pick up what? ")
                 current_room, current_player = pickup(answer, current_player, current_room)
             else:
                 current_room, current_player = pickup(answer[2], current_player, current_room)
@@ -57,8 +57,8 @@ def PrintOptions(current_room, current_player):
         elif answer[0].upper() == "HELP":
             helpscreen()
         else:
-            print("you what????")
-            print("Type help if you are stuck for the commands to use")
+            print("You what???? ")
+            print("Type 'Help' if you are stuck for the commands to use ")
 
 def eat(answer, current_player):
     newInv = []
@@ -67,7 +67,7 @@ def eat(answer, current_player):
             if item.type.upper() == "FOOD":
                 current_player.health += item.potency
             else:
-                print("I can't eat that!")
+                print("You can't eat that! ")
                 newInv.append(item)
         else:
              newInv.append(item)
@@ -82,9 +82,9 @@ def pickup(answer, current_player, current_room):
         else:
             roomitems.append(item)
     if len(roomitems) == len(current_room.items):
-        print("you cannot pick that up")
+        print("You cannot pick that up")
     else:
-        print("successfully picked up "+answer)
+        print("Successfully picked up "+answer)
         current_room.items = roomitems
         return current_room, current_player
 
@@ -100,9 +100,9 @@ def drop(answer, current_player, current_room):
     if (found):
         current_player.inventory = inventory
         return current_player, current_room
-        print("successfully dropped "+answer)
+        print("Successfully dropped "+answer)
     else:
-        print("you do not have one of those to drop")
+        print("You do not have one of those to drop")
         return current_player, current_room
 
 def CreatePlayer():
@@ -134,7 +134,7 @@ def CreatePlayer():
     return player(name,gender)
 
 def roomStart(current_player):
-    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.\nWill you die a failure, or will you be remembered forever?",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["forward","right","left"])
+    return room.room("The Royal Kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.\nWill you die a failure, or will you be remembered forever?",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["forward","right","left"])
 
 def menu(current_room, current_player):
     print(current_room.name.upper()+"\n\n"+current_room.description)
@@ -142,14 +142,14 @@ def menu(current_room, current_player):
 def printRoomItems(itemlist):
     itemslist = listItems(itemlist)
     if itemslist == "":
-        print("There are no carryable items in this room")
+        print("There are no carryable items in this room.")
     else:
         print("You can pick up: "+itemslist+" from here.")
 
 def printInventoryItems(inventory):
     itemslist = listItems(inventory)
     if itemslist == "":
-        print("There are no items you can drop")
+        print("There are no items you can drop.")
     else:
         print("You have and can drop "+itemslist)
     edible = []
@@ -160,7 +160,7 @@ def printInventoryItems(inventory):
     if len(edibleList) > 0:
         print("You can also eat: "+edibleList)
     else:
-        print("You are carrying no edible items")
+        print("You are carrying no edible items.")
 def listItems(itemlist):
     itemslist = ""
     for item in itemlist:
@@ -191,13 +191,13 @@ def enterbattle(current_player, enemy):
         enemy.TakeDamage(item.potency)
         print("You successfully hit your enemy and their health is now at "+enemy.health)
         if enemy.CheckDeath():
-             print("You have dealt your enemy a fatal blow")
+             print("You have dealt your enemy a fatal blow.")
              print("You have won the battle and you can advance to the next room! You have also looted all of the items your enemy had.")
              return current_room, current_player
         current_player.HealthDamage(enemy.attack[1])
         print("Your enemy retaliated and reduced your health by "+enemy.attack[1]+" to "+current_player.health+" by using their weapon of "+enemy.attack[0])
         if current_player.CheckDeath():
-             print("You lost the battle you will go to the last static room")
+             print("You lost the battle you will go to the last static room.")
              current_room = current_room.LastStatic
              return current_room, current_player
         
