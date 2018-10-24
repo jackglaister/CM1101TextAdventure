@@ -170,7 +170,7 @@ def CreatePlayer():
             else:
                 longish = True
     os.system("cls")
-    gender = input("Please pick your Gender: Male, Female or Other ")
+    gender = input("Please pick your Gender: Male, Female or Other\n> ")
     if gender.upper() == ("MALE" or "BOY"):
         gender = 1
     elif gender.upper() == ("FEMALE" or "GIRL"):

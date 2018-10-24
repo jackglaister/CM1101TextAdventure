@@ -24,15 +24,16 @@ itemDict = {
     "wine":item("wine","wine",0.3,"A small glass bottle filled with delicious Pinot Noir",50,"food",10),
     "beer":item("beer","beer",0.2,"A hip flask full of cheap beer",5,"food",5),
 #weapons
-    "kitchenknife":item("knife", "kitchen knife", 3, "A standard 4 inch knife for food prep, could be used as a weapon in an emergency.",50,"weapon",50),
-    "basesword":item("basesword","sword",15,"A single handed, double edged sword",90,"weapon",75),
-    "ultimatesword":item("ultimatesword","ultimatesword",20,"A large two handed, heavyweight sword",200,"weapon",150),
+    "kitchenknife":item("knife", "kitchen knife", 3, "A standard 4 inch knife for food prep, could be used as a weapon in an emergency.",50,"weapon",25),
+    "basesword":item("basesword","sword",8,"A single handed, double edged sword",90,"weapon",50),
+    "claymore":item("claymore","claymore",11,"a two handed sword, basic in design, lethal in use",90,"weapon",75),
+    "zweihander":item("zweihander","zweihander",17,"A large blade with a big handle",120,"weapon",100),
+    "ultimatesword":item("ultimatesword","ultimatesword",10,"A skillfully crafted sword with perfect balance and speed",200,"weapon",150),
 #armour    I added armour in but idk if there's an armour type 
     "helmet":item("helmet","helmet",9,"A garment for protecting the head",60,"armour",30),
     "chestplate":item("chestplate","chestplate",20,"A garment for protecting the chest",70,"armour",40),
     "leggings":item("leggings","leggings",8,"A garment for protecting the legs",50,"armour",25),
     "boots":item("boots","boots",5,"A garment for protecting the feet",40,"armour",25),
 #potions
-    "potionhp":item("pot.hp","health potion",0.3,"A potion used to restore 60 hp to the drinker",40,"food",60),
-#this potion could be used to increase the sword stat for a short period of time 
-    "potiondamage":item("pot.dam","damage potion",0.3,"A potion that causes 50% extra damage on attack",40,"weapon",1.5)}
+    "potionhp":item("pot.hp","health potion",0.3,"A potion used to restore 60 hp to the drinker",40,"food",60)
+    }
