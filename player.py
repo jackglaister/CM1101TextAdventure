@@ -6,6 +6,7 @@ class player:
         self.stamina = 100
         self.xp = 0
         self.inventory = []
+        self.itemsWeight = 0
     def HealthDamage(self, damage):
         self.health -= damage
     def GainXP(self, damage):

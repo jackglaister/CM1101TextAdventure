@@ -7,8 +7,41 @@ def GameControl():
     current_room = roomStart(current_player)
     while True:
         os.system("cls")
-        menu(current_room, current_player)
-        current_room, current_player = PrintOptions(current_room, current_player)
+        if current_room.enemy != "":
+            print("Your health is currently: "+str(current_player.health))
+            if current_room.enemy.name == "thief":
+                current_room, current_player = enterbattle(current_room, current_player, enemy)
+            elif current_room.enemy.name == "bandit":
+                current_room, current_player = enterbattle(current_room, current_player, enemy)
+            elif current_room.enemy.name == "old lady":
+                menu(current_room, current_player)
+                while True:
+                    answer = input("Do you want to buy the sword, ignore her or attack her for it? \n")
+                    answer.split(" ")
+                    if len(answer) > 0:
+                        if answer[0].lower() == "buy":
+                            if current_player.gold < 100:
+                                print("You don't have enough gold")
+                            else:
+                                if current_player.itemsWeight + items["ultimatesword"].weight < 50:
+                                    print("You bought an ultimatesword")
+                                    current_player.inventory.append(items["ultimatesword"])
+                                    current_player.gold -= 100
+                                    break
+                                else:
+                                    print("That will make you too heavy")
+                        elif answer[0].lower() == "attack":
+                            current_room, current_player = enterbattle(current_room, current_player, enemy)
+                        elif answer[0].lower() == "ignore":
+                            print("You move to the next room")
+                            current_room = current_room.next()
+                        else:
+                            print("I didn't understand that")
+                    else:
+                        print("I didn't understand that")
+        else:
+            menu(current_room, current_player)
+            current_room, current_player = PrintOptions(current_room, current_player)
 
 def PrintOptions(current_room, current_player):
     printRoomItems(current_room.items)
@@ -35,7 +68,7 @@ def PrintOptions(current_room, current_player):
                 answer = input("drop what?")
                 current_player, current_room = drop(answer, current_player, current_room)
             else:
-                current_player, current_room = drop(answer[2:len(answer)], current_player, current_room)
+                current_player, current_room = drop(answer[1:len(answer)], current_player, current_room)
         elif answer[0].upper() == "PICK":
             if len(answer) < 3:
                 answer = input("pick up what? ")
@@ -66,6 +99,7 @@ def eat(answer, current_player):
         if answer.upper() == item.name.upper():
             if item.type.upper() == "FOOD":
                 current_player.health += item.potency
+                current_player.itemsWeight -= item.weight
             else:
                 print("I can't eat that!")
                 newInv.append(item)
@@ -78,13 +112,18 @@ def pickup(answer, current_player, current_room):
     roomitems = []
     for item in current_room.items:
         if item.name.split(" ")[0].upper() == answer[0].upper():
-            current_player.inventory.append(item)
+            if current_player.itemsWeight+item.weight < 50:
+                current_player.inventory.append(item)
+                current_player.itemsWeight += item.weight
+                print("Your new weight "+str(current_player.itemsWeight))
+            else:
+                print("That item would make you too heavy")
         else:
             roomitems.append(item)
     if len(roomitems) == len(current_room.items):
         print("you cannot pick that up")
     else:
-        print("successfully picked up "+current_player.inventory[len(current_player.inventory)-1].name)
+        print("successfully picked up "+listToString(answer))
         current_room.items = roomitems
         return current_room, current_player
 
@@ -92,18 +131,25 @@ def drop(answer, current_player, current_room):
     found = False
     inventory = []
     for item in current_player.inventory:
-        if answer == item.name:
+        if answer[0].upper() == item.name.split(" ")[0].upper():
             found = True
             current_room.items.append(item)
+            current_player.itemsWeight -= item.weight
         else:
             inventory.append(item)
-    if (found):
+    if len(inventory) != len(current_player.inventory):
         current_player.inventory = inventory
+        print("successfully dropped "+listToString(answer))
         return current_player, current_room
-        print("successfully dropped "+answer)
     else:
         print("you do not have one of those to drop")
         return current_player, current_room
+
+def listToString(listItems):
+    string = ""
+    for item in listItems:
+        string = string+item+" "
+    return string
 
 def CreatePlayer():
     longish = False
@@ -173,7 +219,7 @@ def printExits(current_room):
     for exitr in current_room.exits:
         print("Go "+exitr)
 
-def enterbattle(current_player, enemy):
+def enterbattle(current_room, current_player, enemy):
     print("========================================BATTLE========================================")
     battle = True
     while battle:
@@ -201,7 +247,6 @@ def enterbattle(current_player, enemy):
              print("You lost the battle you will go to the last static room")
              current_room = current_room.LastStatic
              return current_room, current_player
-        
 
 def helpscreen():
     print("HOW TO MOVE \n type go and a direction on your keyboard and hit enter, for example: \n go forward")
