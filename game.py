@@ -39,6 +39,8 @@ def GameControl():
                             print("I didn't understand that")
                     else:
                         print("I didn't understand that")
+            elif current_room.name=="Merchant:
+                merchantEncounter(itemDict,current_player,current_room)
         else:
             menu(current_room, current_player)
             current_room, current_player = PrintOptions(current_room, current_player)
@@ -218,6 +220,33 @@ def printExits(current_room):
     print("You can: ")
     for exitr in current_room.exits:
         print("Go "+exitr)
+        
+def merchantEncounter(itemDict,player,current_room):  
+    stock = ItemDict
+    del stock["caviar"]
+    del stock["oyster"]
+    del stock["kitchenknife"]
+    print("You can buy:\n")
+    for i in stock:
+        print(i.name,"for",i.value,"gold")
+    done = False
+    while not done:
+        answer = input("\nWhat would you like to do?\n")
+        answer = answer.split(" ")
+        if answer[0].lower=="leave":
+            done=True
+            current_room=current_room.next("forward")
+        elif answer[0] in ["buy","purchase"]:
+            present=False
+            for thing in stock:
+                if stock[thing].name==answer[1]:
+                    item_in_question=stock[thing]
+                    present=True
+            if not present:
+                print("They don't have that here.")
+            elif item_in_question.value<player.money:
+                print("Successfully bought a",item_in_question.name)
+                player.money-=item_in_question.value
 
 def enterbattle(current_room, current_player, enemy):
     print("========================================BATTLE========================================")
