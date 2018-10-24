@@ -79,7 +79,7 @@ RandRooms = [
     room("Thief's Lair","A thief has approached you and is demanding everything you have. He seems a worthy enemy, you are sure you can take him on.",0,[],[]),
 
     room("Bandit attack","A bandit is blocking your path ahead, they haven't yet spotted you but one movement could cost your life. Tread carefully.",0,[],[]),
-    room("Loss Kid"," A kid is blocking the path in front of you, he appears to be hungry. Do you feed him or leave him? ",0,[],[]),
+    room("Lost Kid"," A kid is blocking the path in front of you, he appears to be hungry. Do you feed him or leave him? ",0,[],[]),
     room("Merchant's Son"," The merchant's on steps into your path with a clueless look on his face. Do you give him directions? ",0,[],[]),
     
 ]
