@@ -66,6 +66,7 @@ def eat(answer, current_player):
         if answer.upper() == item.name.upper():
             if item.type.upper() == "FOOD":
                 current_player.health += item.potency
+                print("You have eaten the item")
             else:
                 print("You can't eat that! ")
                 newInv.append(item)
