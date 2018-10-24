@@ -1,4 +1,5 @@
 from random import randint
+import enemy
 class room():
     def __init__(self, name, description, x, items, exits):	#init class (x and y are location variables)
         self.name=name
@@ -6,6 +7,7 @@ class room():
         self.number=x
         self.exits=exits
         self.items=items
+        self.enemy=""
     def is_valid_exit(self, desired):
         for exits in self.exits:
             if exits.upper() == desired.upper():
@@ -18,9 +20,18 @@ class room():
         self = rooms[RoomNumber]
         try:
             if self == "random":
-                self = RandRooms[randint(0,len(RandRooms)-1)]
+                roomSelection = randint(0,len(RandRooms)-1)
+                self = RandRooms[roomSelection]
                 self.number = RoomNumber
                 self.LastStatic = LastStatic
+                if roomSelection == 0:
+                    self.enemy = oldlady()
+                elif roomSelection == 1:
+                    self.enemy = oldman()
+                elif roomSelection == 2:
+                    self.enemy = thief(800, 100)
+                elif roomSelection == 3:
+                    self.enemy = bandit(300, 100)
                 return self
         except:
             self = self
@@ -45,7 +56,7 @@ rooms = [
 
 RandRooms = [
     room("Dark Road","An old homeless lady is sat on the edge of a path with a sword she told you was very valuable and was passed down from a long line of ancestors and is offering it for sale for 100 gold",0,[],[]),
-    room("The Highway","An old man is trying to cross a 4 lane wide highway ahead of you",0,0,[]),
-    room("Thief's Lair","A thief has approached you and is demanding everything you have",0,0,[]),
-    room("Bandit attack","A bandit is blocking your path ahead, they haven't yet spotted you but one movement could cost your life",0,0,[])    
+    room("The Highway","An old man is trying to cross a 4 lane wide highway ahead of you",0,[],[]),
+    room("Thief's Lair","A thief has approached you and is demanding everything you have",0,[],[]),
+    room("Bandit attack","A bandit is blocking your path ahead, they haven't yet spotted you but one movement could cost your life",0,[],[])    
 ]

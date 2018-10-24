@@ -41,13 +41,13 @@ def PrintOptions(current_room, current_player):
                 answer = input("pick up what? ")
                 current_room, current_player = pickup(answer, current_player, current_room)
             else:
-                current_room, current_player = pickup(answer[2], current_player, current_room)
+                current_room, current_player = pickup(answer[2:len(answer)], current_player, current_room)
         elif answer[0].upper() == "TAKE":
             if len(answer) < 2:
                 answer = input("Take what? ")
                 current_room, current_player = pickup(answer, current_player, current_room) 
             else:
-                current_room, curernt_player = pickup(answer[1], current_player, current_room)
+                current_room, curernt_player = pickup(answer[1:len(answer)], current_player, current_room)
         elif (answer[0].upper() == "EAT" or answer[0].upper() == "CONSUME"):
             if len(answer) < 2:
                 answer = input("Eat what? ")
@@ -77,14 +77,14 @@ def eat(answer, current_player):
 def pickup(answer, current_player, current_room):
     roomitems = []
     for item in current_room.items:
-        if item.name.upper() == answer.upper():
+        if item.name.split(" ")[0].upper() == answer[0].upper():
             current_player.inventory.append(item)
         else:
             roomitems.append(item)
     if len(roomitems) == len(current_room.items):
         print("you cannot pick that up")
     else:
-        print("successfully picked up "+answer)
+        print("successfully picked up "+current_player.inventory[len(current_player.inventory)-1].name)
         current_room.items = roomitems
         return current_room, current_player
 
@@ -161,6 +161,7 @@ def printInventoryItems(inventory):
         print("You can also eat: "+edibleList)
     else:
         print("You are carrying no edible items")
+
 def listItems(itemlist):
     itemslist = ""
     for item in itemlist:
