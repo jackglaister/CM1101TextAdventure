@@ -27,7 +27,7 @@ itemDict = {
     "kitchenknife":item("knife", "kitchen knife", 3, "A standard 4 inch knife for food prep, could be used as a weapon in an emergency.",50,"weapon",25),
     "basesword":item("basesword","sword",8,"A single handed, double edged sword",90,"weapon",50),
     "claymore":item("claymore","claymore",11,"a two handed sword, basic in design, lethal in use",90,"weapon",75),
-    "zweihander":item("zweihander","zweihander",17,"A large blade with a ")
+    "zweihander":item("zweihander","zweihander",17,"A large blade with a big handle",120,"weapon",100),
     "ultimatesword":item("ultimatesword","ultimatesword",10,"A skillfully crafted sword with perfect balance and speed",200,"weapon",150),
 #armour    I added armour in but idk if there's an armour type 
     "helmet":item("helmet","helmet",9,"A garment for protecting the head",60,"armour",30),
