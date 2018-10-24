@@ -124,6 +124,7 @@ def pickup(answer, current_player, current_room):
             roomitems.append(item)
     if len(roomitems) == len(current_room.items):
         print("you cannot pick that up")
+        return current_room, current_player
     else:
         print("successfully picked up "+listToString(answer))
         current_room.items = roomitems
