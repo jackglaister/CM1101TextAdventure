@@ -28,7 +28,7 @@ class bandit(enemy):
         self.attack = ["axe",30]
 
 class oldlady(enemy)
-    def __init__(self, health, xp):
+    def __init__(self):
         self.attack = ["ultimatesword",150]
         self.name="old lady"
         self.health = 50

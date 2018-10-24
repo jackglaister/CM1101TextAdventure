@@ -18,7 +18,7 @@ class room():
         self = rooms[RoomNumber]
         try:
             if self == "random":
-                self = RandRooms[randint(0,len(RandRooms))]
+                self = RandRooms[randint(0,len(RandRooms)-1)]
                 self.number = RoomNumber
                 self.LastStatic = LastStatic
                 return self

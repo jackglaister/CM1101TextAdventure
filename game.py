@@ -1,14 +1,38 @@
 from player import player
 from items import itemDict
-import room, os
+import room, os, enemy
 def GameControl():
     os.system("cls")
     current_player = CreatePlayer()
     current_room = roomStart(current_player)
+    enemy = ""
     while True:
         os.system("cls")
         menu(current_room, current_player)
-        current_room, current_player = PrintOptions(current_room, current_player)
+        if enemy == "":
+            current_room, current_player = PrintOptions(current_room, current_player)
+        else:
+            current_room, current_player = enterBattle(current_player, enemy, current_room)
+        current_room, current_enemy = configureRoom(current_room, current_player)
+
+def configureRoom(current_room, current_player): 
+   if current_room.name == "Dark Road":
+       current_enemy = enemy.oldlady()
+       print(current_room.name)
+       print(current_room.description)
+       print("You can: attack her, pay the money or ignore her")
+       while True:
+           user_choice = input("what do you want to do: ")
+           if user_choice{0:6].upper() == "ATTACK":
+               enterbattle(current_player, current_enemy)
+           elif user_choice[0:4].upper() == "PAY":
+               if (current_player.gold > 100):
+                   current_player.gold -= 100
+                   current_player.inventory.append(itemDict["ultimatesword"])
+               else:
+                   print("You don't have enough gold")
+           elif user_choice[0:7].upper() == "IGNORE":
+               return current_room, current_player
 
 def PrintOptions(current_room, current_player):
     printRoomItems(current_room.items)
@@ -172,7 +196,7 @@ def printExits(current_room):
     for exitr in current_room.exits:
         print("Go "+exitr)
 
-def enterbattle(current_player, enemy):
+def enterbattle(current_player, enemy, current_room):
     print("========================================BATTLE========================================")
     battle = True
     while battle:
