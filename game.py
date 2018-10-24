@@ -227,6 +227,7 @@ def drop(answer, current_player, current_room):
     if len(inventory) != len(current_player.inventory):
         current_player.inventory = inventory
         print("successfully dropped "+listToString(answer))
+        print("Your new weight: "+str(current_player.itemsWeight))
         return current_player, current_room
     else:
         print("you do not have one of those to drop")
