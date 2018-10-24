@@ -9,10 +9,18 @@ class player:
         self.itemsWeight = 0
         self.gold = 200
         self.karma = 0
+        self.win = False
     def HealthDamage(self, damage):
         self.health -= damage
     def GainXP(self, damage):
         self.xp = self.xp+damage/4
+    def CheckKarmaWin(self):
+        if self.karma > 100:
+            return True
+        if self.karma < 100:
+            return True
+        else:
+            return False
     def CheckDeath(self, damage):
         if self.health < 0:
             return True

@@ -15,15 +15,14 @@ class room():
                 return True
             else:
                 return False
-    def next(self):
+    def next(self,number):
         LastStatic = self
-        RoomNumber = self.number + 1
-        self = rooms[RoomNumber]
+        self = rooms[number]
         try:
             if self == "random":
                 roomSelection = randint(0,len(RandRooms)-1)
                 self = RandRooms[roomSelection]
-                self.number = RoomNumber
+                self.number = number
                 self.LastStatic = LastStatic
                 if roomSelection == 0:
                     self.enemy = oldlady()
@@ -37,6 +36,7 @@ class room():
         except:
             self = self
             self.LastStatic = self
+            self.number=number
             return self
 
 rooms = [
@@ -72,4 +72,8 @@ RandRooms = [
     room("Merchant's Son"," The merchant's son steps into your path with a clueless look on his face. Do you give him directions or leave him? ",0,[],[]),
     room("Wild Animal"," A wild animal is blocking your path, trying to shield its cubs from you. Do you force the animal out of your way or walk around it? ",0,[],[]),
     room("Tired Traveller"," A wary traveller crosses your path, looking exhausted. Do you give him directions or laugh at him as you walk past? ",0,[],[]),
+    room("Castle Basement","Puzzle 1",0,[],[]),
+    room("Puzzle 2","puzzle 3",0,[],[]),
+    room("Puzzle 3","puzzle 3",0,[],[]),
+    room("Dragon","You have wondered far into a dragon's cave, the dragon is called kirill, you can not fight him as you are not strong enough but if you have the secret then you can win the game",0,[],[])
 ]
