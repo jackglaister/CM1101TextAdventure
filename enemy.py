@@ -98,3 +98,9 @@ class kirill(dragonling):
     def TakeTurn(self, player):
         player.takeDamage(self.attack[1])
         return player
+
+class kid(enemy):
+    def __init__(self):
+        self.health = 10
+        self.name = "kid"
+        
