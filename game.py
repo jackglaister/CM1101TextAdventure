@@ -134,7 +134,7 @@ def CreatePlayer():
     return player(name,gender)
 
 def roomStart(current_player):
-    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["forward","right","left"])
+    return room.room("the royal kitchen","you are a young servant known by the name "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.\nWill you die a failure, or will you be remembered forever?",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["forward","right","left"])
 
 def menu(current_room, current_player):
     print(current_room.name.upper()+"\n\n"+current_room.description)
@@ -173,7 +173,7 @@ def printExits(current_room):
         print("Go "+exitr)
 
 def enterbattle(current_player, enemy):
-    print("========================================BATTLE========================================")
+    print("=======================================BATTLE=========================================")
     battle = True
     while battle:
         print("Your health "+current_player.health+"\n Your enemies health: "+enemy.health)
@@ -192,7 +192,7 @@ def enterbattle(current_player, enemy):
         print("You successfully hit your enemy and their health is now at "+enemy.health)
         if enemy.CheckDeath():
              print("You have dealt your enemy a fatal blow")
-             print("You have won the battle, you will advance to the next room and take all the items the enemy has")
+             print("You have won the battle and you can advance to the next room! You have also looted all of the items your enemy had.")
              return current_room, current_player
         current_player.HealthDamage(enemy.attack[1])
         print("Your enemy retaliated and reduced your health by "+enemy.attack[1]+" to "+current_player.health+" by using their weapon of "+enemy.attack[0])
@@ -203,10 +203,10 @@ def enterbattle(current_player, enemy):
         
 
 def helpscreen():
-    print("HOW TO MOVE \n type go and a direction on your keyboard and hit enter, for example: \n go forward")
-    print("HOW TO TAKE AN ITEM FROM A ROOM \n type 'take' or 'pick up' and then the name of the item and hit enter, for example: \n take bread")
-    print("HOW TO DROP AN ITEM FROM YOUR INVENTORY \n type 'drop' and then the name of the item you wish to drop and press enter, for example: \n drop bread")
-    print("HOW TO EAT AN ITEM \n type 'eat' and then the name of the item in your inventory - you cannot eat straight from the room, for example: \n eat bread")
-    print("HOW TO ATTACK \n type 'hit with' and then the name of the item you want to attack with, for example: hit with kitchen knife")
+    print("HOW TO MOVE \n Type 'go' and a direction on your keyboard and hit enter, for example: \n 'Go forward'")
+    print("HOW TO TAKE AN ITEM FROM A ROOM \n Type 'take' or 'pick up' and then the name of the item and hit enter, for example: \n 'Take bread'")
+    print("HOW TO DROP AN ITEM FROM YOUR INVENTORY \n Type 'drop' and then the name of the item you wish to drop and press enter, for example: \n 'Drop bread'")
+    print("HOW TO EAT AN ITEM \n Type 'eat' and then the name of the item in your inventory - you cannot eat an item unless you have taken it, for example: \n 'Eat bread'")
+    print("HOW TO ATTACK \n Type 'hit with' and then the name of the item you want to attack with, for example: \n 'Hit with kitchen knife'")
 
 GameControl()
