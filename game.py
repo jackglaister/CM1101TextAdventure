@@ -8,16 +8,15 @@ def GameControl():
     while True:
         os.system("cls")
         menu(current_room, current_player)
-        PrintOptions(current_room, current_player)
+        current_room, current_player = PrintOptions(current_room, current_player)
 
 def PrintOptions(current_room, current_player):
     printRoomItems(current_room.items)
     printInventoryItems(current_player.inventory)
     print("Your health is currently "+str(current_player.health))
-    done = False
     print("\n What do you wish to do: ")
     printExits(current_room)
-    while not done:
+    while True:
         answer = input(">")
         answer = answer.split(" ")
         if answer[0].upper() == "GO":
@@ -27,10 +26,10 @@ def PrintOptions(current_room, current_player):
                 answer = input("Go where?")
                 if current_room.is_valid_exit(answer):
                     current_room = current_room.next(answer)
-                    done = True
+                    return current_room, current_player
             elif current_room.is_valid_exit(answer[1]):
                 current_room = current_room.next(answer[1])
-                done = True
+                return current_room, current_player
         elif answer[0].upper() == "DROP":
             if len(answer) < 2:
                 answer = input("drop what?")
@@ -191,15 +190,17 @@ def enterbattle(current_player, enemy):
             print("I didn't understand that, please try again")
         enemy.TakeDamage(item.potency)
         print("You successfully hit your enemy and their health is now at "+enemy.health)
+        if enemy.CheckDeath():
+             print("You have dealt your enemy a fatal blow")
+             print("You have won the battle, you will advance to the next room and take all the items the enemy has")
+             return current_room, current_player
         current_player.HealthDamage(enemy.attack[1])
         print("Your enemy retaliated and reduced your health by "+enemy.attack[1]+" to "+current_player.health+" by using their weapon of "+enemy.attack[0])
         if current_player.CheckDeath():
              print("You lost the battle you will go to the last static room")
              current_room = current_room.LastStatic
              return current_room, current_player
-        elif enemy.CheckDeath():
-             print("You have won the battle, you will advance to the next room and take all the items the enemy has")
-             return current_room, current_player
+        
 
 def helpscreen():
     print("HOW TO MOVE \n type go and a direction on your keyboard and hit enter, for example: \n go forward")
