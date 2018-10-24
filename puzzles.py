@@ -104,3 +104,9 @@ def colour():
                 break
     os.system('color 7')    
     return complete
+
+#puzzles = {
+#    "first puzzle":rhyme(),
+#    "second puzzle":number(),
+#    "third puzzle":colour()
+#}

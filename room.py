@@ -1,5 +1,6 @@
 from random import randint
 import enemy
+from puzzles import *
 class room():
     def __init__(self, name, description, x, items, exits):	#init class (x and y are location variables)
         self.name=name
@@ -43,11 +44,11 @@ rooms = [
     "random",
     "random",
     "random",
-    room("Castle Basement",firstPuzzle(),5,[],[]),
+    room("Castle Basement","firstPuzzle",5,[],[]),
     "random",
     "random",
     "random",
-    room("Puzzle 2",secondPuzzle(),9,[],[])
+    room("Puzzle 2","secondPuzzle",9,[],[]),
     "random",
     "random",
     "random",
@@ -55,7 +56,7 @@ rooms = [
     "Kirill Encounter",
     "random",
     "random",
-    room("Puzzle 3",thirdPuzzle(),17,[],[])
+    room("Puzzle 3","thirdPuzzle",17,[],[]),
     "random",
     "random",
     "random",
