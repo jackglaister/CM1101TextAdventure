@@ -7,6 +7,8 @@ class player:
         self.xp = 0
         self.inventory = []
         self.itemsWeight = 0
+        self.money = 200
+        self.karma = 0
     def HealthDamage(self, damage):
         self.health -= damage
     def GainXP(self, damage):
