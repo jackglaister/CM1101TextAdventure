@@ -40,15 +40,15 @@ class room():
             return self
 
 rooms = [
-    "starter room"
+    "starter room",
     "random",
     "random",
     "random",
-    room("Castle Basement","firstPuzzle",5,[],[]),
+    room("Castle Basement","A mysterious voice is commanding you to prove yourself",5,[],[]),
     "random",
     "random",
     "random",
-    room("Puzzle 2","secondPuzzle",9,[],[]),
+    room("Rift","A mysterious voice is commanding you to prove yourself",9,[],[]),
     "random",
     "random",
     "random",
@@ -56,7 +56,7 @@ rooms = [
     "Kirill Encounter",
     "random",
     "random",
-    room("Puzzle 3","thirdPuzzle",17,[],[]),
+    room("Obelisk","A mysterious voice is commanding you to prove yourself",17,[],[]),
     "random",
     "random",
     "random",
@@ -72,8 +72,8 @@ RandRooms = [
     room("Merchant's Son"," The merchant's son steps into your path with a clueless look on his face. Do you give him directions or leave him? ",0,[],["Give directions","Leave him alone"]),
     room("Wild Animal"," A wild animal is blocking your path, trying to shield its cubs from you. Do you force the animal out of your way or walk around it? ",0,[],["Walk around","Force your way past"]),
     room("Tired Traveller"," A wary traveller crosses your path, looking exhausted. Do you give him directions or laugh at him as you walk past? ",0,[],["Give help","Leave him"]),
-    room("Castle Basement","puzzle 1 description",0,[],[]),
-    room("Puzzle 2","puzzle 2 description",0,[],[]),
-    room("Puzzle 3","puzzle 3 description",0,[],[]),
-    room("Dragon","You have wondered far into a dragon's cave, the dragon is called kirill, you can not fight him as you are not strong enough but if you have the secret then you can win the game",0,[],["do nothing","prepare to die"])
+    room("Castle Basement","A mysterious voice is commanding you to prove yourself",0,[],[]),
+    room("A rift of befuddlement ","A mysterious voice is commanding you to prove yourself",0,[],[]),
+    room("Obelisk of mindfulness","A mysterious voice is commanding you to prove yourself",0,[],[]),
+    room("Dragon","You have wondered far into a dragon's cave, the dragon is called kirill, you can not fight him as you are not strong enough but if you have the secrets then you can win the game",0,[],["do nothing","prepare to die"])
 ]
