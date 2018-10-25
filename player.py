@@ -17,7 +17,7 @@ class player:
     def CheckKarmaWin(self):
         if self.karma > 100:
             return True
-        if self.karma < 100:
+        if self.karma < -100:
             return True
         else:
             return False
