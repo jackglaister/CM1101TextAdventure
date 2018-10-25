@@ -16,7 +16,7 @@ def GameControl():
         os.system("cls") #only works in CMD so run it in that 
         print("Your health is currently: "+str(current_player.health))
         print("Your karma is currently: "+str(current_player.karma)+" and you currently have "+str(current_player.gold)+" gold.")
-        print("You have",str(current_player.itemsWeight),"worth of weight in your inventory.")
+        print("You have ",str(current_player.itemsWeight),"worth of weight in your inventory.")
         if current_room.name=="Merchant":
             merchantEncounter(itemDict,current_player,current_room)
         else:
@@ -94,7 +94,6 @@ def PrintOptions(current_room, current_player, number):
             menu(current_room, current_player)
             answer = input("Do you stop to help or ignore him")
             answersplit=answer.split(" ")
-            print(answersplit)
             if answersplit[0].upper() in ["HELP","STOP"]:
                 print("You successfully help the old man across the highway, you gain 100 gold and 10 karma")
                 current_player.gold += 100
