@@ -15,6 +15,7 @@ def GameControl():
         os.system("cls")
         print("Your health is currently: "+str(current_player.health))
         print("Your karma is currently: "+str(current_player.karma)+" and you currently have "+str(current_player.gold)+" gold.")
+        print("You have",str(current_player.itemsWeight),"worth of weight in your inventory.")
         if current_room.number % 3 != 0:
             if current_room.name == "Thief's Lair":
                 healthTMP = current_player.health+50
@@ -37,7 +38,7 @@ def GameControl():
                             if current_player.gold < 100:
                                 print("You don't have enough gold")
                             else:
-                                if current_player.itemsWeight + items["ultimatesword"].weight < 50:
+                                if current_player.itemsWeight + items["ultimatesword"].weight < 500:
                                     print("You bought the ultimate sword.")
                                     current_player.inventory.append(items["ultimatesword"])
                                     current_player.gold -= 100
@@ -202,11 +203,9 @@ def PrintOptions(current_room, current_player, number):
                     if current_room.is_valid_exit(answer):
                         current_room = current_room.next(number+1)
                         print("succeed in travelling")
-                        return current_room, current_player
                 elif current_room.is_valid_exit(answer[1]):
                     current_room = current_room.next(number+1)
                     print("fail at travelling")
-                    return current_room, current_player
             elif answer[0].upper() == "DROP":
                 if len(answer) < 2:
                     answer = input("drop what?")
@@ -218,11 +217,12 @@ def PrintOptions(current_room, current_player, number):
                     answer = input("pick up what? ")
                     current_room, current_player = pickup(answer, current_player, current_room)
                 else:
+                    print("picking up an item")
                     current_room, current_player = pickup(answer[2:len(answer)], current_player, current_room)
             elif answer[0].upper() == "TAKE":
                 if len(answer) < 2:
                     answer = input("Take what? ")
-                    current_room, current_player = pickup(answer, current_player, current_room) 
+                    current_room, current_player = pickup(answer, current_player, current_room)
                 else:
                     current_room, curernt_player = pickup(answer[1:len(answer)], current_player, current_room)
             elif (answer[0].upper() == "EAT" or answer[0].upper() == "CONSUME"):
@@ -256,7 +256,7 @@ def pickup(answer, current_player, current_room):
     roomitems = []
     for item in current_room.items:
         if item.name.split(" ")[0].upper() == answer[0].upper():
-            if current_player.itemsWeight+item.weight < 50:
+            if current_player.itemsWeight+item.weight < 500:
                 current_player.inventory.append(item)
                 current_player.itemsWeight += item.weight
                 print("Your new weight "+str(current_player.itemsWeight))
