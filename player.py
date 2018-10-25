@@ -26,3 +26,6 @@ class player:
             return True
         else:
             return False
+    def win(self):
+        print("CONGRATULATIONS, YOU WIN")
+        print("https://www.youtube.com/watch?v=1Bix44C1EzY")

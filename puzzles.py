@@ -9,8 +9,7 @@ def rhyme():
     complete = False
     user_input = user_input.replace(" ", "")
     user_input = user_input.lower()
-    print(user_input)
-    if user_input == "tasketbaskethourflower" or user_input == "tasket basket hour flower":
+    if user_input == "tasketbaskethourflower":
         complete = True
         print("you got that correct, Congrats")
     else:
@@ -87,7 +86,7 @@ def colour():
                 complete = True
                 break
             elif incorrect == 0:
-                print("I'm sorry, you hyave failed")
+                print("I'm sorry, you have failed")
                 complete = False
                 break
         elif str(user_input) != str(colours[rand_word]):
