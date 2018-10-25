@@ -33,29 +33,6 @@ class room():
                 self.enemy = enemy.bandit(300, 100)
         return self
 
-        
-##        LastStatic = self
-##        self = rooms[number]
-##        try:
-##            if self == "random":
-##                roomSelection = randint(0,len(RandRooms)-1)
-##                self = RandRooms[roomSelection]
-##                self.number = number
-##                self.LastStatic = LastStatic
-##                if roomSelection == 0:
-##                    self.enemy = oldlady()
-##                elif roomSelection == 1:
-##                    self.enemy = oldman()
-##                elif roomSelection == 2:
-##                    self.enemy = thief(800, 100)
-##                elif roomSelection == 3:
-##                    self.enemy = bandit(300, 100)
-##                return self
-##        except:
-##            self.LastStatic = self
-##            self.number=number
-##            return self
-
 rooms = [
     "starter room",
     "random",
