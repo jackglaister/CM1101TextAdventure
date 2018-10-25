@@ -38,7 +38,7 @@ def GameControl():
                                 print("You don't have enough gold")
                             else:
                                 if current_player.itemsWeight + items["ultimatesword"].weight < 50:
-                                    print("You bought an ultimatesword")
+                                    print("You bought the ultimate sword.")
                                     current_player.inventory.append(items["ultimatesword"])
                                     current_player.gold -= 100
                                     current_player.karma += 10
@@ -79,6 +79,7 @@ def GameControl():
                      current_room = current_room.next(number+1)
                  else:
                      print("You left him on the side of the road to continue his aimless and clueless wondering")
+                     current_room = current_room.next(number+1)
             elif current_room.name=="Wild Animal":
                 menu(current_room, current_player)
                 answer = input()
@@ -93,7 +94,7 @@ def GameControl():
             elif current_room.name=="Tired Traveller":
                 menu(current_room, current_player)
                 answer = input()
-                if answer.split(" ")[0].upper() == "GIVE":
+                if answer.split(" ")[0].upper() in ["GIVE","HELP"] :
                     print("The traveller rewards you with 50 gold and thanks you for helping them find the way they need to go")
                     current_player.karma += 5
                     current_player.gold += 50
@@ -200,9 +201,11 @@ def PrintOptions(current_room, current_player, number):
                     answer = input("Go where?")
                     if current_room.is_valid_exit(answer):
                         current_room = current_room.next(number+1)
+                        print("succeed in travelling")
                         return current_room, current_player
                 elif current_room.is_valid_exit(answer[1]):
                     current_room = current_room.next(number+1)
+                    print("fail at travelling")
                     return current_room, current_player
             elif answer[0].upper() == "DROP":
                 if len(answer) < 2:
@@ -323,7 +326,7 @@ def CreatePlayer():
     return player(name,gender)
 
 def roomStart(current_player):
-    return room.room("the royal kitchen","you are a young servant known as "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["forward","right","left"])
+    return room.room("the royal kitchen","you are a young servant known as "+ current_player.name +".\nYou have fallen ill to a grave illness and have decided to leave\nyour terrible life and seek fame and fortune.",0,[itemDict["bread"],itemDict["fish"],itemDict["honey"],itemDict["chicken"],itemDict["kitchenknife"],itemDict["caviar"],itemDict["oyster"]],["Go forward","Take an item"])
 
 def menu(current_room, current_player):
     print(current_room.name.upper()+"\n\n"+current_room.description)
@@ -360,7 +363,7 @@ def listItems(itemlist):
 def printExits(current_room):
     print("You can: ")
     for exitr in current_room.exits:
-        print("Go "+exitr)
+        print(exitr)
         
 def merchantEncounter(itemDict,player,current_room):  
     stock = ItemDict

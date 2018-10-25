@@ -4,13 +4,13 @@ import sys
 def rhyme():
     print("I want to test your mental ability before you proceed")
     print("I'm going to give you a sentence, and you have to reuturn the words to me that rhyme, in the order you see them!")
-    print("A tisket, a tasket, here is the ryhming basket. After the fifteenth hour, grows the flower")
+    print("A tisket, a tasket, here is the rhyming basket. After the fifteenth hour, grows the flower")
     user_input = str(input())
     complete = False
     user_input = user_input.replace(" ", "")
     user_input = user_input.lower()
     print(user_input)
-    if user_input == "tasketbaskethourflower":
+    if user_input == "tasketbaskethourflower" or user_input == "tasket basket hour flower":
         complete = True
         print("you got that correct, Congrats")
     else:
