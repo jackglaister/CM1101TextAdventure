@@ -10,55 +10,63 @@ class room():
         self.items=items
         self.enemy=""
     def is_valid_exit(self, desired):
+        print(desired)
+        valid = False
         for exits in self.exits:
-            if exits.upper() == desired.upper():
-                return True
-            else:
-                return False
-    def next(self,number):
-        LastStatic = self
-        self = rooms[number]
-        try:
-            if self == "random":
-                roomSelection = randint(0,len(RandRooms)-1)
-                self = RandRooms[roomSelection]
-                self.number = number
-                self.LastStatic = LastStatic
-                if roomSelection == 0:
-                    self.enemy = oldlady()
-                elif roomSelection == 1:
-                    self.enemy = oldman()
-                elif roomSelection == 2:
-                    self.enemy = thief(800, 100)
-                elif roomSelection == 3:
-                    self.enemy = bandit(300, 100)
-                return self
-        except:
-            self = self
-            self.LastStatic = self
-            self.number=number
-            return self
+            if exits.upper() == desired.upper() or exits.upper()[3:]==desired.upper():
+                valid = True
+        return valid
+    def nextROOM(self,number):
+        print("running nextROOM")
+        lastStaticRoom=self
+        self=rooms[number]
+        if self=="random":
+            newRandRoom = randint(0,len(RandRooms)-1)
+            self=RandRooms[newRandRoom]
+            if newRandRoom == 0:
+                self.enemy = enemy.oldlady()
+            elif newRandRoom == 1:
+                self.enemy = enemy.oldman()
+            elif newRandRoom == 2:
+                self.enemy = enemy.thief(800, 100)
+            elif newRandRoom == 3:
+                self.enemy = enemy.bandit(300, 100)
+        return self
+
+        
+##        LastStatic = self
+##        self = rooms[number]
+##        try:
+##            if self == "random":
+##                roomSelection = randint(0,len(RandRooms)-1)
+##                self = RandRooms[roomSelection]
+##                self.number = number
+##                self.LastStatic = LastStatic
+##                if roomSelection == 0:
+##                    self.enemy = oldlady()
+##                elif roomSelection == 1:
+##                    self.enemy = oldman()
+##                elif roomSelection == 2:
+##                    self.enemy = thief(800, 100)
+##                elif roomSelection == 3:
+##                    self.enemy = bandit(300, 100)
+##                return self
+##        except:
+##            self.LastStatic = self
+##            self.number=number
+##            return self
 
 rooms = [
-    "starter room"
-    "random",
-    "random",
+    "starter room",
     "random",
     room("Castle Basement","firstPuzzle",5,[],[]),
     "random",
-    "random",
-    "random",
     room("Puzzle 2","secondPuzzle",9,[],[]),
-    "random",
-    "random",
     "random",
     room("Merchant","Here is a place where you can buy (almost) anything, use your gold wisely.",13,[],[]),
     "Kirill Encounter",
     "random",
-    "random",
     room("Puzzle 3","thirdPuzzle",17,[],[]),
-    "random",
-    "random",
     "random",
     room("Dragon","You have wondered far into an ominous cave, you heard a roar in the distance and thought you ought to check it out. You have since turned a corner and are faced with a dragon. His name is Kirill and you shall be destroyed for trespassing.",21,[],[])
 ]

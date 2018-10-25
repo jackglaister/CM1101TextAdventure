@@ -1,18 +1,19 @@
 from player import player
 from items import itemDict
-import puzzles
-import enemy
-import room, os
+import puzzles, enemy, room, os
+from time import sleep
+
 def GameControl():
     os.system("cls")
     current_player = CreatePlayer()
     current_room = roomStart(current_player)
     number = 0
     while True:
-        print(number)
-        if current_player.CheckKarmaWin() or current_player.win:
+        if current_player.CheckKarmaWin()==True:
             print("You win the game!")
-        os.system("cls")
+            print("THIS SHOULDN'T HAPPEN")
+            break
+        os.system("cls") #only works in CMD so run it in that 
         print("Your health is currently: "+str(current_player.health))
         print("Your karma is currently: "+str(current_player.karma)+" and you currently have "+str(current_player.gold)+" gold.")
         print("You have",str(current_player.itemsWeight),"worth of weight in your inventory.")
@@ -22,12 +23,12 @@ def GameControl():
                 rival = enemy.thief(current_player.health*2, 100)
                 current_room, current_player = enterbattle(current_room, current_player, rival)
                 current_player.health = healthTMP
-                current_room = current_room.next(number+1)
+                current_room = current_room.nextROOM(number+1)
             elif current_room == "Bandit attack":
                 healthTMP = current_player.health+50
                 rival = enemy.bandit(current_player.health*2, 100)
                 current_room, current_player = enterbattle(current_room, current_player, enemy)
-                current_room = current_room.next(number+1)
+                current_room = current_room.nextROOM(number+1)
             elif current_room.name == "Dark Road":
                 menu(current_room, current_player)
                 while True:
@@ -43,17 +44,17 @@ def GameControl():
                                     current_player.inventory.append(items["ultimatesword"])
                                     current_player.gold -= 100
                                     current_player.karma += 10
-                                    current_room = current_room.next(number+1)
+                                    current_room = current_room.nextROOM(number+1)
                                     break
                                 else:
                                     print("That will make you too heavy")
                         elif answer[0].lower() == "attack":
                             current_room, current_player = enterbattle(current_room, current_player, enemy)
-                            current_room = current_room.next(number+1)
+                            current_room = current_room.nextROOM(number+1)
                             break
                         elif answer[0].lower() == "ignore":
                             print("You move to the next room")
-                            current_room = current_room.next(number+1)
+                            current_room = current_room.nextROOM(number+1)
                             break
                         else:
                             print("I didn't understand that")
@@ -66,32 +67,32 @@ def GameControl():
                     print("You successfully help the old man across the highway, you gain 100 gold and 10 karma")
                     current_player.gold += 100
                     current_player.karma += 10
-                    current_room = current_room.next(number+1)
+                    current_room = current_room.nextROOM(number+1)
                 else:
                     print("You leave the old man to postulate crossing the highway on his own")
                     current_player.karma -= 1
-                    current_room = current_room.next(number+1)
+                    current_room = current_room.nextROOM(number+1)
             elif current_room.name=="Merchant's son":
                  menu(current_room, current_player)
                  answer = input("Give directions or leave?")
                  if answer.split(" ")[0].upper() == "GIVE":
                      print("You successfully gave directions to the merchant's son, he gave you 10 gold he got from his father as pocket money")
                      current_player.gold += 10
-                     current_room = current_room.next(number+1)
+                     current_room = current_room.nextROOM(number+1)
                  else:
                      print("You left him on the side of the road to continue his aimless and clueless wondering")
-                     current_room = current_room.next(number+1)
+                     current_room = current_room.nextROOM(number+1)
             elif current_room.name=="Wild Animal":
                 menu(current_room, current_player)
                 answer = input()
                 if answer.split(" ")[0].upper() == "WALK":
                     current_player.karma += 10
                     print("You walk around the animal and it continues to happily shield it's cubs, you will gain 10 karma points")
-                    current_room = current_room.next(number+1)
+                    current_room = current_room.nextROOM(number+1)
                 else:
                     print("You force the animal out of the way and in doing so, she crushes one of her cubs, you will lose 10 karma points")
                     current_player.karma -= 10
-                    current_room = current_room.next(number+1)
+                    current_room = current_room.nextROOM(number+1)
             elif current_room.name=="Tired Traveller":
                 menu(current_room, current_player)
                 answer = input()
@@ -99,11 +100,11 @@ def GameControl():
                     print("The traveller rewards you with 50 gold and thanks you for helping them find the way they need to go")
                     current_player.karma += 5
                     current_player.gold += 50
-                    current_room = current_room.next(number+1)
+                    current_room = current_room.nextROOM(number+1)
                 else:
                     print("The exhausted traveller, collapses onto the path behind you and you keep walking on")
                     current_player.karma += 1
-                    current_room = current_room.next(number+1)
+                    current_room = current_room.nextROOM(number+1)
             elif current_room.name=="Lost Kid":
                 menu(current_room, current_player)
                 answer = input()
@@ -124,16 +125,16 @@ def GameControl():
                         print("unable to give the food")
                     else:
                         current_player.inventory = newInventory
-                        current_room = current_room.next(number+1)
+                        current_room = current_room.nextROOM(number+1)
                 else:
                     print("The exhausted kid walked past you in a sloppy way as he is too exhausted to know where to place his feet")
                     current_player.karma -= 1
-                    current_room = current_room.next(number+1)
+                    current_room = current_room.nextROOM(number+1)
             elif current_room.name == "Castle Basement":
                 complete = false
                 while not complete:
                     complete = puzzles.rhyme()
-                current_room = current_room.next(number+1)
+                current_room = current_room.nextROOM(number+1)
             elif current_room.name == "Puzzle Room 2":
                 complete = puzzles.number()
                 if not puzzle.complete:
@@ -172,7 +173,7 @@ def GameControl():
                     current_room, current_player = enterbattle(current_room, current_player, enemy)
             else:
                 roomNumber = current_room.number+1
-                current_room = current_room.next(number+1)
+                current_room = current_room.nextROOM(number+1)
                 current_room.number = roomNumber
         else:
             if current_room.name=="Merchant":
@@ -196,16 +197,14 @@ def PrintOptions(current_room, current_player, number):
             answer = input(">")
             answer = answer.split(" ")
             if answer[0].upper() == "GO":
-                if len(answer) > 3:
-                    print("your answer is too long")
-                elif len(answer) < 2:
+                if len(answer)==1:
                     answer = input("Go where?")
                     if current_room.is_valid_exit(answer):
-                        current_room = current_room.next(number+1)
-                        print("succeed in travelling")
-                elif current_room.is_valid_exit(answer[1]):
-                    current_room = current_room.next(number+1)
-                    print("fail at travelling")
+                        current_room = current_room.nextROOM(number+1)
+                        return current_room,current_player
+                elif len(answer)==2 and current_room.is_valid_exit(answer[1]):
+                    current_room = current_room.nextROOM(number+1)
+                    return current_room,current_player
             elif answer[0].upper() == "DROP":
                 if len(answer) < 2:
                     answer = input("drop what?")
@@ -236,6 +235,7 @@ def PrintOptions(current_room, current_player, number):
             else:
                 print("you what????")
                 print("Type help if you are stuck for the commands to use")
+    
 
 def eat(answer, current_player):
     newInv = []
@@ -379,7 +379,7 @@ def merchantEncounter(itemDict,player,current_room):
         answer = answer.split(" ")
         if answer[0].lower=="leave":
             done=True
-            current_room=current_room.next("forward")
+            current_room=current_room.nextROOM(current_room.number+1)
         elif answer[0] in ["buy","purchase"]:
             present=False
             for thing in stock:
